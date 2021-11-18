@@ -1,8 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, Platform, TouchableOpacity } from 'react-native';
 import Svg, { G, Rect, Path } from "react-native-svg"
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { Video } from 'expo-av';
 import * as ImagePicker from 'expo-image-picker';
 let posA = 0;
 export default function App() {
@@ -73,7 +72,7 @@ export default function App() {
           </Svg>
         </View>
         <View style={styles.buttonArea}>
-          <Text style={styles.buttons}
+          <TouchableOpacity style={styles.buttons}
             onPress={pickImage}
           >
             <Svg
@@ -85,8 +84,8 @@ export default function App() {
                 <Path fill="#fff" d="M21.25 33h67.5v57h-67.5zM21.25 30l3-10H57l3 10z" />
               </G>
             </Svg>
-          </Text>
-          <Text style={styles.buttons}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttons}
             onPress={() => {
               video.current.setPositionAsync(0);
             }}
@@ -102,8 +101,8 @@ export default function App() {
                 <Path fill="#fff" d="M17 20h10v70H17z" />
               </G>
             </Svg>
-          </Text>
-          <Text style={styles.buttons}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttons}
             onPress={() => {
               video.current.setPositionAsync(Math.max(status.positionMillis - 5000, 0));
             }}
@@ -120,8 +119,8 @@ export default function App() {
                 />
               </G>
             </Svg>
-          </Text>
-          <Text style={styles.buttons}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttons}
             onPress={() => {
               status.isPlaying ? video.current.pauseAsync() : video.current.playAsync();
             }}
@@ -146,8 +145,8 @@ export default function App() {
               </G>
             </Svg>
 
-          </Text>
-          <Text style={styles.buttons}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttons}
             onPress={() => {
               video.current.setPositionAsync(status.positionMillis + 5000);
             }}
@@ -161,8 +160,8 @@ export default function App() {
                 <Path d="M25 20l35 35-35 35zM60 20l35 35-35 35z" fill="rgba(255, 255, 255, 1)" />
               </G>
             </Svg>
-          </Text>
-          <Text style={styles.buttons}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttons}
             onPress={() => {
               posA = status.positionMillis;
             }}
@@ -181,8 +180,8 @@ export default function App() {
                 <Path d="M47.16 60.5h10.5l-15.5 19-15.5-19h10.5" fill="none" />
               </G>
             </Svg>
-          </Text>
-          <Text style={styles.buttons}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttons}
             onPress={() => {
               video.current.setPositionAsync(posA);
             }}
@@ -203,7 +202,7 @@ export default function App() {
               </G>
             </Svg>
 
-          </Text>
+          </TouchableOpacity>
         </View>
       </Video>
     </View>
@@ -248,7 +247,7 @@ const styles = StyleSheet.create({
   buttonSvg: {
     width: 40,
     height: 40,
-    opacity: 0.8,
+    opacity: 0.85,
     position: 'absolute',
     left:0,
     top:0
