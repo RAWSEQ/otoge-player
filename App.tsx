@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions, Platform, TouchableOpacity } from 'react-native';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import Svg, { G, Rect, Path } from "react-native-svg"
 import { Video } from 'expo-av';
 import * as ImagePicker from 'expo-image-picker';
@@ -19,6 +20,8 @@ export default function App() {
         }
       }
     })();
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
+
   }, []);
 
   const pickImage = async () => {
@@ -30,6 +33,7 @@ export default function App() {
     });
 
     if (!result.cancelled) {
+      video.current.setPositionAsync(0);
       setVideosource(result.uri);
       if (!splashHide) setSplashHide(true);
       video.current.playAsync();
@@ -227,9 +231,8 @@ const styles = StyleSheet.create({
   },
   video: {
     alignSelf: 'center',
-    width: Dimensions.get('window').height,
-    height: Dimensions.get('window').width,
-    transform: [{ rotate: '90deg'}]
+    width: '100%',
+    height: '100%',
   },
   buttonArea: {
     position: "absolute",
