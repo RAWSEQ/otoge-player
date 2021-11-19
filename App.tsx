@@ -4,6 +4,8 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import Svg, { G, Rect, Path } from "react-native-svg"
 import { Video } from 'expo-av';
 import * as ImagePicker from 'expo-image-picker';
+import { StatusBar } from 'expo-status-bar';
+
 let posA = 0;
 export default function App() {
   const video = React.useRef(null);
@@ -25,6 +27,8 @@ export default function App() {
   }, []);
 
   const pickImage = async () => {
+    video.current.stopAsync();
+
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Videos,
       allowsEditing: false,
@@ -33,7 +37,6 @@ export default function App() {
     });
 
     if (!result.cancelled) {
-      video.current.setPositionAsync(0);
       setVideosource(result.uri);
       if (!splashHide) setSplashHide(true);
       video.current.playAsync();
@@ -209,6 +212,7 @@ export default function App() {
           </TouchableOpacity>
         </View>
       </Video>
+      <StatusBar hidden={true} />
     </View>
   );
 }
